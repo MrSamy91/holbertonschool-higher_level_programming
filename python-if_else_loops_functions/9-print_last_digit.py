@@ -1,8 +1,13 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+
 def print_last_digit(number):
-    if number > 0:
-        lastdigit = number % 10
-    else:
-        lastdigit = -number % 10
-    print("{:d}".format(lastdigit), end="")
-    return lastdigit
+    last_digit = abs(number) % 10
+    print(last_digit, end='')
+    return last_digit
+
+if __name__ == "__main__":
+    # Test cases
+    print_last_digit(98)
+    print_last_digit(0)
+    r = print_last_digit(-1024)
+    print(r)
