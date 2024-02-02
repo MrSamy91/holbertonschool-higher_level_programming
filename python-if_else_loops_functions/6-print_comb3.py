@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-for i in range(0, 8):
-    for j in range(i, 10):
-        if i != j:
-            print("{:d}{:d}, ".format(i, j), end='')
-print("89")
+for tens in range(10):
+    for ones in range(tens + 1, 10):
+        print("{:d}{:d}".format(tens, ones), end=", " if ones < 9 else "\n")
