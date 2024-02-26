@@ -1,19 +1,18 @@
 #!/usr/bin/python3
 """Class rectangle"""
 
+
 class Rectangle:
+
     """
     A class representing a rectangle.
-
     Attributes:
         width (int): The width of the rectangle.
         height (int): The height of the rectangle.
     """
-
     def __init__(self, width=0, height=0):
         """
         Initialize the rectangle with given width and height.
-
         Args:
             width (int): The width of the rectangle. Default is 0.
             height (int): The height of the rectangle. Default is 0.
@@ -30,10 +29,8 @@ class Rectangle:
     def width(self, value):
         """
         Setter method for width with type and value checks.
-
         Args:
             value (int): The width value to set.
-
         Raises:
             TypeError: If the value is not an integer.
             ValueError: If the value is less than 0.
@@ -53,10 +50,8 @@ class Rectangle:
     def height(self, value):
         """
         Setter method for height with type and value checks.
-
         Args:
             value (int): The height value to set.
-
         Raises:
             TypeError: If the value is not an integer.
             ValueError: If the value is less than 0.
@@ -70,7 +65,6 @@ class Rectangle:
     def area(self):
         """
         Calculate and return the area of the rectangle.
-
         Returns:
             int: The area of the rectangle.
         """
@@ -79,7 +73,6 @@ class Rectangle:
     def perimeter(self):
         """
         Calculate and return the perimeter of the rectangle.
-
         Returns:
             int: The perimeter of the rectangle.
         """
@@ -90,7 +83,6 @@ class Rectangle:
     def __str__(self):
         """
         Generate a string representation of the rectangle.
-
         Returns:
             str: The string representation of the rectangle.
         """
@@ -101,7 +93,6 @@ class Rectangle:
     def __repr__(self):
         """
         Generate a string representation for debugging.
-
         Returns:
             str: The string representation for debugging purposes.
         """
