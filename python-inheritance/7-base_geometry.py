@@ -1,17 +1,14 @@
 #!/usr/bin/python3
 """
-Define a class BaseGeometry
+Defines BaseGeometry
 """
 
+
 class BaseGeometry:
-    """
-    BaseGeometry class
-    """
+    """Class for geometry objects"""
 
     def area(self):
-        """
-        Raises an Exception with the message area() is not implemented
-        """
+        """Raises an Exception with the message area() is not implemented"""
         raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
@@ -29,7 +26,9 @@ class BaseGeometry:
         if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
 
+
 if __name__ == "__main__":
+
     # Test cases
     bg = BaseGeometry()
 
