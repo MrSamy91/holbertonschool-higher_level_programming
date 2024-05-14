@@ -1,7 +1,8 @@
 def uppercase(s):
+    result = ""
     for c in s:
         if 'a' <= c <= 'z':
-            print("{:c}".format(ord(c) - 32), end="")
+            result += chr(ord(c) - 32)
         else:
-            print("{:c}".format(ord(c)), end="")
-    print()
+            result += c
+    print(result)
