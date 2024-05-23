@@ -1,25 +1,22 @@
 #!/usr/bin/python3
-def add_integer(a, b=98):
-    """
-    Adds two integers or floats and returns the result as an integer.
-    
-    Args:
-        a: The first integer or float.
-        b: The second integer or float, defaults to 98.
 
-    Returns:
-        The sum of a and b, cast to an integer.
-    
-    Raises:
-        TypeError: If a or b are not integers or floats.
+"""
+Module for addition
+Add two integers
+Cast float into ints
+"""
+
+
+def add_integer(a, b=98):
+    """add two integers
+    Returns: sum (int)
     """
-    if not isinstance(a, (int, float)):
+    if isinstance(a, float):
+        a = int(a)
+    if isinstance(b, float):
+        b = int(b)
+    if not (isinstance(a, int)):
         raise TypeError("a must be an integer")
-    if not isinstance(b, (int, float)):
+    if not (isinstance(b, int)):
         raise TypeError("b must be an integer")
-    
-    # Cast a and b to integers if they are floats
-    a = int(a)
-    b = int(b)
-    
     return a + b
