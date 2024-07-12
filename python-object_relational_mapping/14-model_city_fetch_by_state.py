@@ -1,22 +1,23 @@
 #!/usr/bin/python3
-"""List all states"""
-from sys import argv
-from model_state import Base, State
+"""Task: Change the name of a State object from the database"""
+import sys
+from model_state import State, Base
 from model_city import City
-from sqlalchemy import (create_engine)
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 if __name__ == "__main__":
-    engine = create_engine(
-        'mysql+mysqldb://{}:{}@localhost:3306/{}'
-        .format(argv[1], argv[2],
-                argv[3]), pool_pre_ping=True)
-    Base.metadata.create_all(engine)
-    Session = sessionmaker(bind=engine)
+    connect = create_engine(
+        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
+            sys.argv[1],
+            sys.argv[2],
+            sys.argv[3]),
+        pool_pre_ping=True)
+    Session = sessionmaker(bind=connect)
     session = Session()
-    results = session.query(City, State).\
-        filter(City.state_id == State.id).all()
-    for city, state in results:
+    Cities = session.query(City, State).filter(City.state_id == State.id).\
+        order_by(City.id)
+
+    for city, state in Cities:
         print("{}: ({}) {}".format(state.name, city.id, city.name))
-    session.commit()
-    session.close()
