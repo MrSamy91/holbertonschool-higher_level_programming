@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-
-for i in range(10):
-    for j in range(i+1, 10):
-        print("{:d}{:d}".format(i, j), end="")
-        if i != 8 or j != 9:
-            print(", ", end="")
+for firstDigit in range(0, 9):
+    for secondDigit in range(firstDigit + 1, 10):
+        if (firstDigit != 8 or secondDigit != 9):
+            print("{}{}".format(firstDigit, secondDigit), end=", ")
         else:
-            print()
+            print("{}{}".format(firstDigit, secondDigit))
