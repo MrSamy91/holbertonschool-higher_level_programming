@@ -1,2 +1,2 @@
-Python - import & modules
-2malade
+python-import_modules
+let's learn pyhthon
