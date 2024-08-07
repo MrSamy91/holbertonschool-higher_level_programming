@@ -2,44 +2,37 @@
 import MySQLdb
 import sys
 
-def main():
-    if len(sys.argv) != 4:
-        print(f"Usage: {sys.argv[0]} <username> <password> <database>")
-        return
-
+def list_states():
+    # Get command line arguments
     username = sys.argv[1]
     password = sys.argv[2]
-    database = sys.argv[3]
+    db_name = sys.argv[3]
 
-    try:
-        # Connect to MySQL
-        conn = MySQLdb.connect(
-            host='localhost',
-            port=3306,
-            user=username,
-            passwd=password,
-            db=database
-        )
-        
-        # Create a cursor object using cursor() method
-        cursor = conn.cursor()
+    # Connect to the MySQL server
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=username,
+        passwd=password,
+        db=db_name
+    )
 
-        # Execute SQL query
-        cursor.execute("SELECT * FROM states ORDER BY id")
+    # Create a cursor object
+    cursor = db.cursor()
 
-        # Fetch all rows
-        rows = cursor.fetchall()
+    # Execute the SQL query
+    cursor.execute("SELECT id, name FROM states ORDER BY id ASC")
 
-        # Print each row
-        for row in rows:
-            print(row)
+    # Fetch all the results
+    states = cursor.fetchall()
 
-    except MySQLdb.Error as e:
-        print(f"MySQL Error {e}")
-    finally:
-        # Close cursor and connection
-        cursor.close()
-        conn.close()
+    # Print the results
+    for state in states:
+        print(state)
+
+    # Close the cursor and the connection
+    cursor.close()
+    db.close()
 
 if __name__ == "__main__":
-    main()
+    list_states()
