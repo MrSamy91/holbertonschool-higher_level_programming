@@ -1,19 +1,26 @@
 #!/usr/bin/python3
-"""Task: List all states that match the argument safely"""
+"""
+script that takes in arguments and displays all values in the states table of
+hbtn_0e_0_usa where name matches the argument.
+But this time, write one that is safe from MySQL injections
+"""
+
 import MySQLdb
-import sys
+from sys import argv
 
 if __name__ == "__main__":
-    connect = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3])
-    cur = connect.cursor()
-    cur.execute("""SELECT * FROM  states WHERE states.name=%s
-                ORDER BY states.id""", (sys.argv[4],))
-    qrows = cur.fetchall()
+    """
+    Access to the database and get the states
+    from the database.
+    """
+    db = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                         passwd=argv[2], db=argv[3])
 
-    for row in qrows:
-        print(row)
+    with db.cursor() as curseur:
+        curseur.execute("SELECT * FROM states WHERE name = %s ORDER BY id ASC",
+                        (argv[4],))
+        rows = curseur.fetchall()
+        for row in rows:
+            print(row)
+    curseur.close()
+    db.close()

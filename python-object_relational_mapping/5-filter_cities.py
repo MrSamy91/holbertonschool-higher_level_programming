@@ -1,24 +1,26 @@
 #!/usr/bin/python3
-"""Task: List all cities of a state"""
+"""
+This script that takes in the name of a state as an argument and
+lists all cities of that state, using the database hbtn_0e_4_usa
+"""
+
 import MySQLdb
-import sys
+from sys import argv
 
 if __name__ == "__main__":
-    connect = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3])
-    search = sys.argv[4].split(';')[0].strip("'")
-    cur = connect.cursor()
-    cur.execute("SELECT cities.name FROM cities \
-                JOIN states ON cities.state_id = states.id \
-                WHERE states.name=%s \
-                ORDER BY cities.id ASC", (search,)
-                )
-    qrows = cur.fetchall()
-    cities = []
-    for row in qrows:
-        cities.append("{}".format(row[0]))
-    print(", ".join(cities))
+    """
+    Access to the database and get the cities
+    """
+    db = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                         passwd=argv[2], db=argv[3])
+
+    with db.cursor() as curseur:
+        curseur.execute("SELECT cities.id, cities.name\
+                    FROM cities\
+                    JOIN states\
+                    ON cities.state_id = states.id\
+                    WHERE states.name LIKE BINARY %(state_name)s\
+                    ORDER BY cities.id ASC", {'state_name': argv[4]})
+        rows = curseur.fetchall()
+    if rows is not None:
+        print(", ".join([row[1] for row in rows]))
